@@ -1,68 +1,82 @@
 import turtle
-
-shape="circle"
-size=50
+shape = "circle"
+color = "tomato3"
+size = 50
 
 # initialization
 turtle.penup()
 turtle.goto(-300,0)
 turtle.clear()
 turtle.pendown()
-turtle.shape("classic")
+turtle.shape("blank")
 turtle.pensize(5)
-turtle.pencolor("red")
+turtle.color(color, color)
 
 def print_square_brush(x,y):
     global size
-    turtle.goto(x,y)
+    turtle.penup()
+    turtle.goto(x + size, y + size)
     turtle.begin_fill()
     turtle.pendown()
-    turtle.forward(size)
+    turtle.setheading(180)
+    turtle.forward(size * 2)
     turtle.left(90)
-    turtle.forword(size)
+    turtle.forward(size * 2)
     turtle.left(90)
-    turtle.forword(size)
+    turtle.forward(size * 2)
     turtle.left(90)
-    turtle.forword(size)
+    turtle.forward(size * 2)
     turtle.end_fill()
-    turtle.penup()
+    turtle.penup
 
 def print_circle_brush(x,y):
     global size
     turtle.penup()
-    turtle.goto(x,y)
-    turtle.pendown()
+    turtle.goto(x, y - size)
     turtle.begin_fill()
-    turtle.fillcolor("red")
+    turtle.pendown()
+    turtle.setheading(0)
     turtle.circle(size)
     turtle.end_fill()
-    
     turtle.penup()
 
-def drawShape(x,y):
+def draw_shape(x,y):
+    global shape
     if shape == "circle":
         print_circle_brush(x,y)
-    elif shape=="square":
+    else:
         print_square_brush(x,y)
-        
-#turtle.onscreenclick(print_square_brush, btn=3, add=True)
 
-#def switch_shape():
-    #turtle.onscreenclick(print_square_brush, btn=3, add=True)
-    #shape = "square" 
+def change_shape():
+    global shape
+    if shape == "circle":
+        shape = "square"
+    else:
+        shape = "circle"
 
+def change_color():
+    global color
+    if color == "tomato3":
+        color = "cyan4"
+    else:
+        color = "tomato3"
+    turtle.color(color, color)
 
-#turtle.getscreen().onkeypress(onscreenclick(turtle.goto), "d")
+def bigger():
+    print("bigger")
+    global size
+    size += 10
 
-turtle.onscreenclick(drawShape)
+def smaller():
+    print("smaller")
+    global size
+    size -= 10
 
-#turtle.getscreen().onkeypress(change_color,"")
+turtle.listen()
+turtle.onkeypress(change_shape, "s")
+turtle.onkeypress(change_color, "c")
+turtle.onkeypress(bigger, "plus")
+turtle.onkeypress(smaller, "minus")
+turtle.onscreenclick(draw_shape, btn=1)
 
-#print_squre_brush(size) 
-#print_circle_brush(size)
-
-#turtle.onscreenclick(print_square_brush, btn=3, add=True)
-
-"""if turtle.onscreenclick(print_square_brush, btn=3, add=True):
-    shape = "square" """
 turtle.mainloop()
